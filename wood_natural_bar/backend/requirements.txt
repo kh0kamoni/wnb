@@ -1,0 +1,26 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+alembic
+# psycopg2-binary already installed
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart
+pydantic
+pydantic-settings
+python-dotenv
+Pillow
+aiofiles
+websockets
+httpx
+python-escpos
+zeroconf
+APScheduler
+pandas
+openpyxl
+reportlab
+qrcode
+slowapi
+email-validator
+pytz
+psycopg2-binary

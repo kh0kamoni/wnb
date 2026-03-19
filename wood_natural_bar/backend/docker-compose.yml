@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: woodbar_db
+    environment:
+      POSTGRES_DB: woodbar_db
+      POSTGRES_USER: woodbar
+      POSTGRES_PASSWORD: woodbar_pass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U woodbar -d woodbar_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: woodbar_backend
+    environment:
+      DATABASE_URL: postgresql://woodbar:woodbar_pass@db:5432/woodbar_db
+      SECRET_KEY: ${SECRET_KEY:-change-this-in-production-min-32-chars-here}
+      DEBUG: ${DEBUG:-false}
+      RESTAURANT_NAME: ${RESTAURANT_NAME:-Wood Natural Bar}
+    volumes:
+      - ./uploads:/app/uploads
+      - ./static:/app/static
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+    network_mode: host  # Required for mDNS to work on local network
+
+volumes:
+  postgres_data:

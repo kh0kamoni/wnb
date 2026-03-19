@@ -1,0 +1,57 @@
+# Windows-compatible requirements
+# Use this if requirements.txt fails: pip install -r requirements_windows.txt
+
+# Core framework
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+
+# Database - psycopg2 pre-built (no compilation needed)
+sqlalchemy==2.0.30
+alembic==1.13.1
+# Install psycopg2 BEFORE this file: pip install psycopg2-binary --only-binary=:all:
+
+# Auth
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+
+# Request parsing
+python-multipart==0.0.9
+pydantic==2.7.1
+pydantic-settings==2.2.1
+python-dotenv==1.0.1
+
+# File handling
+Pillow==10.3.0
+aiofiles==23.2.1
+
+# WebSocket
+websockets==12.0
+
+# HTTP client
+httpx==0.27.0
+
+# Printing (ESC/POS)
+python-escpos==3.1
+
+# mDNS (network discovery)
+zeroconf==0.132.2
+
+# Scheduler
+APScheduler==3.10.4
+
+# Reports
+pandas==2.2.2
+openpyxl==3.1.2
+reportlab==4.2.0
+
+# QR codes
+qrcode==7.4.2
+
+# Rate limiting
+slowapi==0.1.9
+
+# Validation
+email-validator==2.1.1
+
+# Timezone
+pytz==2024.1
